@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_bar_height"
+        android:background="#f9f9f9"
+        app:cardElevation="@dimen/navigation_bar_shadow_radius"
+        app:cardCornerRadius="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/chat_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Identity Verification"
+                    android:textColor="#2a338f"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    style="@style/font_medium" />
+
+                <TextView
+                    android:id="@+id/chat_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="2dp"
+                    android:text="Sum&amp;Substance"
+                    android:maxLines="1"
+                    android:textColor="#2a338f"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:layout_width="204dp"
+        android:layout_height="131dp"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/ss_logo"
+        android:layout_marginTop="36dp"/>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/test_actions_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="#2a338f"
+                android:text="Welcome,"
+                android:textSize="36sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="#2a338f"
+                android:text="log in to continue"
+                android:textSize="36sp"
+                style="@style/font_light"/>
+
+            <EditText
+                android:id="@+id/test_login"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/test_input_bg"
+                android:hint="Username"
+                android:paddingLeft="28dp"
+                android:paddingRight="28dp"
+                android:textColorHint="#4a4a4a"
+                android:textColor="#212121"
+                android:textSize="18sp"
+                style="@style/font_light"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/test_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/test_input_bg"
+                android:hint="Password"
+                android:paddingLeft="28dp"
+                android:paddingRight="28dp"
+                android:textColorHint="#4a4a4a"
+                android:textColor="#212121"
+                android:textSize="18sp"
+                style="@style/font_light"
+                android:maxLines="1"
+                android:inputType="textPassword"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/test_login_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardBackgroundColor="#2a338f"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="30dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/event_action_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:textSize="18sp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:text="Log in"/>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/test_loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:textColor="#2a338f"
+            android:text="Loading..."
+            style="@style/font_light"
+            android:textSize="36sp"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+</LinearLayout>
