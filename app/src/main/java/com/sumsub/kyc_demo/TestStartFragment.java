@@ -75,7 +75,7 @@ public class TestStartFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID) {
+        if (requestCode == KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID && data != null) {
             Toast.makeText(requireContext(), "Liveness3D status is " + data.getSerializableExtra(KYCLiveness3DActivity.EXTRA_RESULT), Toast.LENGTH_SHORT).show();
         }
     }

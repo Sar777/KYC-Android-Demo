@@ -9,8 +9,8 @@ android {
         applicationId "com.sumsub.auth_sdk"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 4
-        versionName "2.1.4"
+        versionCode 5
+        versionName "2.2.0-Beta8"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -36,6 +36,11 @@ android {
     packagingOptions {
         exclude 'META-INF/proguard/coroutines.pro'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -47,9 +52,9 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.0'
 
-    implementation 'com.sumsub:kyc-core:2.2.0-Beta4'
-    implementation 'com.sumsub:kyc-liveness3d:2.2.0-Beta4'
-    implementation 'com.sumsub:kyc-client:2.2.0-Beta4'
+    implementation 'com.sumsub:kyc-core:2.2.0-Beta8'
+    implementation 'com.sumsub:kyc-liveness3d:2.2.0-Beta8'
+    implementation 'com.sumsub:kyc-client:2.2.0-Beta8'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
