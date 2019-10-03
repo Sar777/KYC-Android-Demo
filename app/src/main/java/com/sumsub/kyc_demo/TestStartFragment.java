@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class TestStartFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        navigationFragment = (TestNavigationFragment)getParentFragment();
+        navigationFragment = (TestNavigationFragment) getParentFragment();
     }
 
     @Nullable
@@ -75,10 +76,12 @@ public class TestStartFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID) {
             Liveness3DResult liveness = (Liveness3DResult) data.getSerializableExtra(KYCLiveness3DActivity.EXTRA_RESULT);
             Toast.makeText(requireContext(), "Liveness3D status is " + liveness.getResult(), Toast.LENGTH_SHORT).show();
+            if (liveness.getResult() == Liveness3DResult.Result.InitializationFailed) {
+                Log.e("KYC Init Failed:", ((Liveness3DResult.InitializationFailed) liveness).getReason().toString());
+            }
         }
     }
 
@@ -144,7 +147,7 @@ public class TestStartFragment extends Fragment {
 
     private String visualTextForLocale(Locale locale) {
         String lang = locale.getDisplayLanguage(locale);
-        return lang.substring(0,1).toUpperCase() + lang.substring(1);
+        return lang.substring(0, 1).toUpperCase() + lang.substring(1);
     }
 
     private void updateLanguageButton() {
@@ -266,7 +269,7 @@ public class TestStartFragment extends Fragment {
         if (getActivity() == null) {
             return;
         }
-        ((TestActivity)getActivity()).startKYCModule();
+        ((TestActivity) getActivity()).startKYCModule();
     }
 
     private void startLivenessModule() {
