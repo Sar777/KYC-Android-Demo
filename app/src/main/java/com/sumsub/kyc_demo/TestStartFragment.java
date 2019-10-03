@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sumsub.kyc.liveness3d.KYCLivenessCustomization;
+import com.sumsub.kyc.liveness3d.data.model.Liveness3DResult;
 import com.sumsub.kyc.liveness3d.presentation.KYCLiveness3DActivity;
 
 import java.util.List;
@@ -74,7 +77,8 @@ public class TestStartFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID) {
-            Toast.makeText(requireContext(), "Liveness3D status is " + data.getSerializableExtra(KYCLiveness3DActivity.EXTRA_STATUS), Toast.LENGTH_SHORT).show();
+            Liveness3DResult liveness = (Liveness3DResult) data.getSerializableExtra(KYCLiveness3DActivity.EXTRA_RESULT);
+            Toast.makeText(requireContext(), "Liveness3D status is " + liveness.getResult(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -269,7 +273,11 @@ public class TestStartFragment extends Fragment {
         final String apiUrl = "https://test-msdk2.sumsub.com";
         String token = TestManager.getInstance().getToken();
         String applicant = TestManager.getInstance().getApplicant();
-        startActivityForResult(KYCLiveness3DActivity.Companion.newIntent(requireContext(), apiUrl, applicant, token, Locale.getDefault()), KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID);
+
+        KYCLivenessCustomization customization = new KYCLivenessCustomization();
+        customization.getFrame().setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.blueDark));
+        customization.getFrame().setRatio(0.98f);
+        startActivityForResult(KYCLiveness3DActivity.Companion.newIntent(requireContext(), apiUrl, applicant, token, Locale.getDefault(), customization), KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID);
     }
 
     private void languagePickerClick() {

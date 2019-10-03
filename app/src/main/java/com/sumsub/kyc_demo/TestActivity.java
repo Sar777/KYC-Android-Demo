@@ -13,7 +13,7 @@ import com.sumsub.kyc.core.dataManager.KYCColorConfig;
 import com.sumsub.kyc.core.dataManager.KYCIconConfig;
 import com.sumsub.kyc.core.dataManager.KYCReviewResult;
 import com.sumsub.kyc.core.dataManager.KYCStringConfig;
-import com.sumsub.kyc.liveness3d.ZoomModule;
+import com.sumsub.kyc.liveness3d.Liveness3DModule;
 
 import java.util.Collections;
 
@@ -67,7 +67,7 @@ public class TestActivity extends AppCompatActivity {
                 new KYCIconConfig());
 
 
-        KYCManager.init(this, clientData, TestManager.getInstance().getKYCTokenUpdater(), Collections.singletonList(new ZoomModule()));
+        KYCManager.init(this, clientData, TestManager.getInstance().getKYCTokenUpdater(), Collections.singletonList(new Liveness3DModule()));
         Intent intent = new Intent(this, KYCChatActivity.class);
         startActivityForResult(intent, KYC_REQUEST_CODE);
     }
