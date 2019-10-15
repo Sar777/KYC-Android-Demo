@@ -11,10 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.sumsub.kyc.liveness3d.presentation.KYCLiveness3DActivity;
-
-import java.util.Locale;
-
 public class TestLoginFragment extends Fragment {
 
     private EditText loginField;

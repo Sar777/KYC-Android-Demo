@@ -1,13 +1,11 @@
 package com.sumsub.kyc_demo;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -15,11 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.sumsub.kyc.liveness3d.KYCLivenessCustomization;
-import com.sumsub.kyc.liveness3d.data.model.Liveness3DResult;
-import com.sumsub.kyc.liveness3d.presentation.KYCLiveness3DActivity;
 
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +23,7 @@ public class TestStartFragment extends Fragment {
     private View continueButton;
     private View livenessButton;
     private TextView continueText;
+    private TextView livenessText;
     private View startNewButton;
     private View languageButton;
     private TextView languageText;
@@ -45,7 +39,7 @@ public class TestStartFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        navigationFragment = (TestNavigationFragment)getParentFragment();
+        navigationFragment = (TestNavigationFragment) getParentFragment();
     }
 
     @Nullable
@@ -72,30 +66,28 @@ public class TestStartFragment extends Fragment {
         updateContinueButton();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID) {
-            Liveness3DResult liveness = (Liveness3DResult) data.getSerializableExtra(KYCLiveness3DActivity.EXTRA_RESULT);
-            Toast.makeText(requireContext(), "Liveness3D status is " + liveness.getResult(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void updateContinueButton() {
         if (TestManager.getInstance().getApplicant() != null) {
             continueText.setAlpha(1.0f);
             continueButton.setClickable(true);
 
+            livenessText.setAlpha(1.0f);
+            livenessButton.setClickable(true);
+
+
         } else {
             continueText.setAlpha(0.4f);
             continueButton.setClickable(false);
+
+            livenessText.setAlpha(0.4f);
+            livenessButton.setClickable(false);
         }
     }
 
     private void bindViews(View v) {
         continueButton = v.findViewById(R.id.test_continue_existing);
         livenessButton = v.findViewById(R.id.test_liveness_existing);
+        livenessText = v.findViewById(R.id.test_liveness);
         continueText = v.findViewById(R.id.test_continue_text);
         startNewButton = v.findViewById(R.id.test_start_new);
         languageButton = v.findViewById(R.id.test_language_pick);
@@ -136,7 +128,10 @@ public class TestStartFragment extends Fragment {
         livenessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLiveness3d();
+                if (getActivity() == null) {
+                    return;
+                }
+                ((TestActivity)getActivity()).startKYCLivenessModule();
             }
         });
 
@@ -144,7 +139,7 @@ public class TestStartFragment extends Fragment {
 
     private String visualTextForLocale(Locale locale) {
         String lang = locale.getDisplayLanguage(locale);
-        return lang.substring(0,1).toUpperCase() + lang.substring(1);
+        return lang.substring(0, 1).toUpperCase() + lang.substring(1);
     }
 
     private void updateLanguageButton() {
@@ -187,29 +182,6 @@ public class TestStartFragment extends Fragment {
                 @Override
                 public void run() {
                     startKYCModule();
-                }
-            });
-        }
-    }
-
-    private void checkLiveness3d() {
-        if (TestManager.getInstance().getToken() == null) {
-            loadToken(new Runnable() {
-                @Override
-                public void run() {
-                    loadApplicant(new Runnable() {
-                        @Override
-                        public void run() {
-                            startLivenessModule();
-                        }
-                    });
-                }
-            });
-        } else {
-            loadApplicant(new Runnable() {
-                @Override
-                public void run() {
-                    startLivenessModule();
                 }
             });
         }
@@ -266,18 +238,7 @@ public class TestStartFragment extends Fragment {
         if (getActivity() == null) {
             return;
         }
-        ((TestActivity)getActivity()).startKYCModule();
-    }
-
-    private void startLivenessModule() {
-        final String apiUrl = "https://test-msdk.sumsub.com";
-        String token = TestManager.getInstance().getToken();
-        String applicant = TestManager.getInstance().getApplicant();
-
-        KYCLivenessCustomization customization = new KYCLivenessCustomization();
-        customization.getFrame().setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.blueDark));
-        customization.getFrame().setRatio(0.98f);
-        startActivityForResult(KYCLiveness3DActivity.Companion.newIntent(requireContext(), apiUrl, applicant, token, Locale.getDefault(), customization), KYCLiveness3DActivity.REQUEST_RESULT_CODE_ID);
+        ((TestActivity) getActivity()).startKYCModule();
     }
 
     private void languagePickerClick() {
