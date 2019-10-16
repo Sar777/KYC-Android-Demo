@@ -81,7 +81,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void startKYCLivenessModule() {
-        final String apiUrl = "https://test-msdk2.sumsub.com";
+        final String apiUrl = "https://test-msdk.sumsub.com";
         String token = TestManager.getInstance().getToken();
         String applicant = TestManager.getInstance().getApplicant();
 
