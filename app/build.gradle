@@ -3,14 +3,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 android {
-
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.sumsub.auth_sdk"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 5
-        versionName "2.3.4"
+        versionName "2.3.5"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -20,6 +19,16 @@ android {
             }
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file('../keys/release.jks')
+            storePassword 'sumsub'
+            keyAlias = 'sumsub'
+            keyPassword 'sumsub'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,6 +39,13 @@ android {
 
         debug {
             buildConfigField("String", 'BASE_URL', '"test-msdk.sumsub.com"')
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def formattedDate = new Date().format('yyyy-MM-dd')
+            outputFileName = "kyc-release-v" + versionName + "-" + formattedDate + ".apk"
         }
     }
 
@@ -53,9 +69,9 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.0'
 
-    implementation 'com.sumsub:kyc-core:2.3.4'
-    implementation 'com.sumsub:kyc-liveness3d:2.3.4'
-    implementation 'com.sumsub:kyc-client:2.3.4'
+    implementation 'com.sumsub:kyc-core:2.3.5'
+    implementation 'com.sumsub:kyc-liveness3d:2.3.5'
+    implementation 'com.sumsub:kyc-client:2.3.5'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
