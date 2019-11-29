@@ -2,6 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+ext {
+    kycVersion = "2.4.1"
+    repoUrl = project.hasProperty("kycRepoUrl") ? project.property("kycRepoUrl") : "https://dl.bintray.com/sumsub/maven"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url project.ext.repoUrl
+    }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -9,7 +21,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 5
-        versionName "2.4.1"
+        versionName project.version
 
         vectorDrawables.useSupportLibrary = true
 
@@ -69,15 +81,9 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.0'
 
-    implementation 'com.sumsub:kyc-core:2.4.1'
-    implementation 'com.sumsub:kyc-liveness3d:2.4.1'
-    implementation 'com.sumsub:kyc-client:2.4.1'
+    implementation "com.sumsub:kyc-core:${project.ext.kycVersion}"
+    implementation "com.sumsub:kyc-liveness3d:${project.ext.kycVersion}"
+    implementation "com.sumsub:kyc-client:${project.ext.kycVersion}"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
-    maven {
-        url  "https://dl.bintray.com/sumsub/maven"
-    }
 }
