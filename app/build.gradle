@@ -9,7 +9,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 5
-        versionName "2.3.5"
+        versionName "2.4.1"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -69,9 +69,9 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.0'
 
-    implementation 'com.sumsub:kyc-core:2.3.5'
-    implementation 'com.sumsub:kyc-liveness3d:2.3.5'
-    implementation 'com.sumsub:kyc-client:2.3.5'
+    implementation 'com.sumsub:kyc-core:2.4.1'
+    implementation 'com.sumsub:kyc-liveness3d:2.4.1'
+    implementation 'com.sumsub:kyc-client:2.4.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

@@ -3,9 +3,9 @@ package com.sumsub.kyc_demo;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.sumsub.kyc.client.KYCManager;
@@ -17,6 +17,7 @@ import com.sumsub.kyc.core.dataManager.KYCReviewResult;
 import com.sumsub.kyc.core.dataManager.KYCStringConfig;
 import com.sumsub.kyc.liveness3d.KYCLivenessCustomization;
 import com.sumsub.kyc.liveness3d.Liveness3DModule;
+import com.sumsub.kyc.liveness3d.Liveness3DResultReceiver;
 import com.sumsub.kyc.liveness3d.data.model.KYCLiveness3D;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessResult;
 import com.sumsub.kyc.liveness3d.data.model.LivenessReason;
@@ -24,6 +25,8 @@ import com.sumsub.kyc.liveness3d.presentation.KYCLivenessFaceAuthActivity;
 
 import java.util.Collections;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -85,10 +88,13 @@ public class TestActivity extends AppCompatActivity {
         String token = TestManager.getInstance().getToken();
         String applicant = TestManager.getInstance().getApplicant();
 
+        Liveness3DResultReceiver result = new Liveness3DResultReceiver(new Handler());
+        result.setReceiver(bundle -> Timber.d("Face Auth result: %s", bundle.toString()));
+
         KYCLivenessCustomization customization = new KYCLivenessCustomization();
         customization.getFrame().setBackgroundColor(ContextCompat.getColor(this, R.color.blueDark));
         customization.getFrame().setRatio(0.98f);
-        startActivityForResult(KYCLivenessFaceAuthActivity.Companion.newIntent(this, apiUrl, applicant, token, Locale.getDefault(), customization), KYCLiveness3D.REQUEST_CODE_ID_FACE_AUTH);
+        startActivityForResult(KYCLivenessFaceAuthActivity.Companion.newIntent(this, apiUrl, applicant, token, Locale.getDefault(), customization, result), KYCLiveness3D.REQUEST_CODE_ID_FACE_AUTH);
     }
 
     @Override
@@ -125,7 +131,7 @@ public class TestActivity extends AppCompatActivity {
         } else if (requestCode == KYC_REQUEST_CODE) {
             KYCReviewResult kycReviewResult = (KYCReviewResult) data.getSerializableExtra(KYCChatActivity.KYC_VERIFICATION_KEY);
             if (kycReviewResult != null) {
-                Log.e("KYC", "KYC Review result: " + kycReviewResult);
+                Timber.e("KYC Review result: %s", kycReviewResult.toString());
             }
         }
     }
