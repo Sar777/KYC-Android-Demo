@@ -129,7 +129,7 @@ public class TestActivity extends AppCompatActivity {
             }
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else if (requestCode == KYC_REQUEST_CODE) {
-            KYCReviewResult kycReviewResult = (KYCReviewResult) data.getSerializableExtra(KYCChatActivity.Companion.getKYC_VERIFICATION_KEY());
+            KYCReviewResult kycReviewResult = (KYCReviewResult) data.getSerializableExtra(KYCChatActivity.KYC_VERIFICATION_KEY);
             if (kycReviewResult != null) {
                 Timber.e("KYC Review result: %s", kycReviewResult.toString());
             }
