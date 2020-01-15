@@ -4,23 +4,23 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.sumsub.kyc.client.KYCManager;
+import com.sumsub.kyc.core.KYCManager;
 import com.sumsub.kyc.client.ui.base.KYCChatActivity;
 import com.sumsub.kyc.core.dataManager.KYCClientData;
 import com.sumsub.kyc.core.dataManager.KYCColorConfig;
 import com.sumsub.kyc.core.dataManager.KYCIconConfig;
 import com.sumsub.kyc.core.dataManager.KYCReviewResult;
 import com.sumsub.kyc.core.dataManager.KYCStringConfig;
+import com.sumsub.kyc.core.model.Liveness3DModule;
 import com.sumsub.kyc.liveness3d.KYCLivenessCustomization;
-import com.sumsub.kyc.liveness3d.Liveness3DModule;
 import com.sumsub.kyc.liveness3d.Liveness3DResultReceiver;
 import com.sumsub.kyc.liveness3d.data.model.KYCLiveness3D;
+import com.sumsub.kyc.liveness3d.data.model.KYCLivenessReason;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessResult;
-import com.sumsub.kyc.liveness3d.data.model.LivenessReason;
 import com.sumsub.kyc.liveness3d.presentation.KYCLivenessFaceAuthActivity;
 
 import java.util.Collections;
@@ -107,25 +107,25 @@ public class TestActivity extends AppCompatActivity {
 
         if (requestCode == KYCLiveness3D.REQUEST_CODE_ID_FACE_DETECTION) {
             KYCLivenessResult.FaceDetection result = data.getParcelableExtra(KYCLiveness3D.EXTRA_RESULT);
-            LivenessReason liveness = result.getLiveness();
+            KYCLivenessReason reason = result.getReason();
 
             String message;
-            if (liveness.getReason() == LivenessReason.Reason.InitializationFailed) {
-                message = "KYC Liveness Face Detection initialization is failed. " + ((LivenessReason.InitializationFailed) liveness).getException().getMessage();
+            if (reason instanceof KYCLivenessReason.InitializationError) {
+                message = "KYC Liveness Face Detection initialization is failed. " + ((KYCLivenessReason.InitializationError) reason).getException().getMessage();
             } else {
-                message = "KYC Liveness Face Detection result is " + liveness.getReason().name();
+                message = "KYC Liveness Face Detection result is " + reason;
             }
 
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else if (requestCode == KYCLiveness3D.REQUEST_CODE_ID_FACE_AUTH) {
             KYCLivenessResult.FaceAuth result = data.getParcelableExtra(KYCLiveness3D.EXTRA_RESULT);
-            LivenessReason liveness = result.getLiveness();
+            KYCLivenessReason reason = result.getReason();
 
             String message;
-            if (liveness.getReason() == LivenessReason.Reason.InitializationFailed) {
-                message = "KYC Liveness Face Auth initialization is failed. " + ((LivenessReason.InitializationFailed) liveness).getException().getMessage();
+            if (reason instanceof KYCLivenessReason.InitializationError) {
+                message = "KYC Liveness Face Auth initialization is failed. " + ((KYCLivenessReason.InitializationError) reason).getException().getMessage();
             } else {
-                message = "KYC Liveness Face Auth result is " + liveness.getReason().name();
+                message = "KYC Liveness Face Auth result is " + reason;
             }
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else if (requestCode == KYC_REQUEST_CODE) {

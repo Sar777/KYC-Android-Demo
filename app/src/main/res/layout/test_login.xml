@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/navigation_bar_height"
         android:background="#f9f9f9"
@@ -51,7 +51,7 @@
             </LinearLayout>
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:layout_width="204dp"
@@ -127,7 +127,7 @@
                 android:maxLines="1"
                 android:inputType="textPassword"/>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/test_login_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -149,7 +149,7 @@
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:text="Log in"/>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <TextView
