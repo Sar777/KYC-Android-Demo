@@ -8,15 +8,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.sumsub.kyc.client.KYCManager;
 import com.sumsub.kyc.client.ui.base.KYCChatActivity;
+import com.sumsub.kyc.core.KYCManager;
 import com.sumsub.kyc.core.dataManager.KYCClientData;
 import com.sumsub.kyc.core.dataManager.KYCColorConfig;
 import com.sumsub.kyc.core.dataManager.KYCIconConfig;
 import com.sumsub.kyc.core.dataManager.KYCReviewResult;
 import com.sumsub.kyc.core.dataManager.KYCStringConfig;
+import com.sumsub.kyc.core.model.Liveness3DModule;
 import com.sumsub.kyc.liveness3d.KYCLivenessCustomization;
-import com.sumsub.kyc.liveness3d.Liveness3DModule;
 import com.sumsub.kyc.liveness3d.Liveness3DResultReceiver;
 import com.sumsub.kyc.liveness3d.data.model.KYCLiveness3D;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessResult;
