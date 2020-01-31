@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 ext {
-    kycVersion = "3.0.1"
+    kycVersion = "3.0.2"
     repoUrl = project.hasProperty("kycRepoUrl") ? project.property("kycRepoUrl") : "https://dl.bintray.com/sumsub/maven"
 }
 

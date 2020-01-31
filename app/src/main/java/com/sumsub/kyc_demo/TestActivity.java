@@ -4,19 +4,20 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.sumsub.kyc.core.KYCManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.sumsub.kyc.client.ui.base.KYCChatActivity;
+import com.sumsub.kyc.core.KYCManager;
 import com.sumsub.kyc.core.dataManager.KYCClientData;
 import com.sumsub.kyc.core.dataManager.KYCColorConfig;
 import com.sumsub.kyc.core.dataManager.KYCIconConfig;
 import com.sumsub.kyc.core.dataManager.KYCReviewResult;
 import com.sumsub.kyc.core.dataManager.KYCStringConfig;
+import com.sumsub.kyc.core.model.KYCLivenessCustomization;
 import com.sumsub.kyc.core.model.Liveness3DModule;
-import com.sumsub.kyc.liveness3d.KYCLivenessCustomization;
 import com.sumsub.kyc.liveness3d.Liveness3DResultReceiver;
 import com.sumsub.kyc.liveness3d.data.model.KYCLiveness3D;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessReason;
@@ -66,6 +67,10 @@ public class TestActivity extends AppCompatActivity {
         //config.setChatButtonBackgroundColor(Color.parseColor("#aaaaaa"));
         //config.setChatButtonTextColor(Color.BLACK);
 
+        KYCLivenessCustomization livenessConfig = new KYCLivenessCustomization();
+        livenessConfig.getFrame().setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+        livenessConfig.getFrame().setRatio(0.98f);
+
         KYCClientData clientData = new KYCClientData(
                 BuildConfig.BASE_URL,
                 getPackageName(),
@@ -75,7 +80,8 @@ public class TestActivity extends AppCompatActivity {
                 "support@sumsub.com",
                 config,
                 new KYCStringConfig(),
-                new KYCIconConfig());
+                new KYCIconConfig(),
+                livenessConfig);
 
 
         KYCManager.init(this, clientData, TestManager.getInstance().getKYCTokenUpdater(), Collections.singletonList(new Liveness3DModule()));
