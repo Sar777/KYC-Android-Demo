@@ -190,7 +190,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/test_liveness_existing"
+                android:id="@+id/test_liveness_face_auth"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 app:cardBackgroundColor="#01D16C"
@@ -201,7 +201,7 @@
                 android:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/test_liveness"
+                    android:id="@+id/tv_liveness_face_auth"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="25dp"
@@ -209,7 +209,31 @@
                     android:textSize="18sp"
                     android:textColor="@android:color/white"
                     android:gravity="center"
-                    android:text="Liveness check"
+                    android:text="Liveness: Face Auth"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/test_liveness_face_liveness"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cardBackgroundColor="#01D16C"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="30dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/tv_liveness_face_liveness"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:text="Liveness: Face Liveness"
                     />
             </androidx.cardview.widget.CardView>
         </LinearLayout>

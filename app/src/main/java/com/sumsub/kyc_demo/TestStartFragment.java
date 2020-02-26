@@ -3,16 +3,17 @@ package com.sumsub.kyc_demo;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import java.util.List;
 import java.util.Locale;
@@ -21,9 +22,11 @@ import java.util.Locale;
 public class TestStartFragment extends Fragment {
 
     private View continueButton;
-    private View livenessButton;
+    private View livenessFaceAuthButton;
+    private View livenessFaceLivenessButton;
     private TextView continueText;
-    private TextView livenessText;
+    private TextView livenessFaceAuthText;
+    private TextView livenessFaceLivenessText;
     private View startNewButton;
     private View languageButton;
     private TextView languageText;
@@ -71,23 +74,29 @@ public class TestStartFragment extends Fragment {
             continueText.setAlpha(1.0f);
             continueButton.setClickable(true);
 
-            livenessText.setAlpha(1.0f);
-            livenessButton.setClickable(true);
+            livenessFaceAuthText.setAlpha(1.0f);
+            livenessFaceAuthButton.setClickable(true);
 
-
+            livenessFaceLivenessText.setAlpha(1.0f);
+            livenessFaceLivenessButton.setClickable(true);
         } else {
             continueText.setAlpha(0.4f);
             continueButton.setClickable(false);
 
-            livenessText.setAlpha(0.4f);
-            livenessButton.setClickable(false);
+            livenessFaceAuthText.setAlpha(0.4f);
+            livenessFaceAuthButton.setClickable(false);
+
+            livenessFaceLivenessText.setAlpha(0.4f);
+            livenessFaceLivenessButton.setClickable(false);
         }
     }
 
     private void bindViews(View v) {
         continueButton = v.findViewById(R.id.test_continue_existing);
-        livenessButton = v.findViewById(R.id.test_liveness_existing);
-        livenessText = v.findViewById(R.id.test_liveness);
+        livenessFaceAuthButton = v.findViewById(R.id.test_liveness_face_auth);
+        livenessFaceAuthText = v.findViewById(R.id.tv_liveness_face_auth);
+        livenessFaceLivenessButton = v.findViewById(R.id.test_liveness_face_liveness);
+        livenessFaceLivenessText = v.findViewById(R.id.tv_liveness_face_liveness);
         continueText = v.findViewById(R.id.test_continue_text);
         startNewButton = v.findViewById(R.id.test_start_new);
         languageButton = v.findViewById(R.id.test_language_pick);
@@ -125,13 +134,23 @@ public class TestStartFragment extends Fragment {
             }
         });
 
-        livenessButton.setOnClickListener(new View.OnClickListener() {
+        livenessFaceAuthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getActivity() == null) {
                     return;
                 }
-                ((TestActivity)getActivity()).startKYCLivenessModule();
+                ((TestActivity)getActivity()).startKYCLivenessFaceAuthModule();
+            }
+        });
+
+        livenessFaceLivenessButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() == null) {
+                    return;
+                }
+                ((TestActivity)getActivity()).startKYCLivenessFaceLivenessModule();
             }
         });
 

@@ -23,6 +23,7 @@ import com.sumsub.kyc.liveness3d.data.model.KYCLiveness3D;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessReason;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessResult;
 import com.sumsub.kyc.liveness3d.presentation.KYCLivenessFaceAuthActivity;
+import com.sumsub.kyc.liveness3d.presentation.KYCLivenessFaceLivenessActivity;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -74,7 +75,6 @@ public class TestActivity extends AppCompatActivity {
         KYCClientData clientData = new KYCClientData(
                 BuildConfig.BASE_URL,
                 getPackageName(),
-                "2.0",
                 TestManager.getInstance().getLocale(),
                 TestManager.getInstance().getApplicant(),
                 "support@sumsub.com",
@@ -89,7 +89,7 @@ public class TestActivity extends AppCompatActivity {
         startActivityForResult(intent, KYC_REQUEST_CODE);
     }
 
-    public void startKYCLivenessModule() {
+    public void startKYCLivenessFaceAuthModule() {
         final String apiUrl = "https://dev-msdk.sumsub.com";
         String token = TestManager.getInstance().getToken();
         String applicant = TestManager.getInstance().getApplicant();
@@ -103,6 +103,17 @@ public class TestActivity extends AppCompatActivity {
         startActivityForResult(KYCLivenessFaceAuthActivity.Companion.newIntent(this, apiUrl, applicant, token, Locale.getDefault(), customization, result), KYCLiveness3D.REQUEST_CODE_ID_FACE_AUTH);
     }
 
+    public void startKYCLivenessFaceLivenessModule() {
+        final String apiUrl = "https://dev-msdk.sumsub.com";
+        String token = TestManager.getInstance().getToken();
+        String applicant = TestManager.getInstance().getApplicant();
+
+        KYCLivenessCustomization customization = new KYCLivenessCustomization();
+        customization.getFrame().setBackgroundColor(ContextCompat.getColor(this, R.color.blueDark));
+        customization.getFrame().setRatio(0.98f);
+        startActivityForResult(KYCLivenessFaceLivenessActivity.Companion.newIntent(this, apiUrl, applicant, token, Locale.getDefault(), customization), KYCLiveness3D.REQUEST_CODE_ID_FACE_DETECTION);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,14 +123,14 @@ public class TestActivity extends AppCompatActivity {
         }
 
         if (requestCode == KYCLiveness3D.REQUEST_CODE_ID_FACE_DETECTION) {
-            KYCLivenessResult.FaceDetection result = data.getParcelableExtra(KYCLiveness3D.EXTRA_RESULT);
+            KYCLivenessResult.FaceLiveness result = data.getParcelableExtra(KYCLiveness3D.EXTRA_RESULT);
             KYCLivenessReason reason = result.getReason();
 
             String message;
             if (reason instanceof KYCLivenessReason.InitializationError) {
-                message = "KYC Liveness Face Detection initialization is failed. " + ((KYCLivenessReason.InitializationError) reason).getException().getMessage();
+                message = "KYC Liveness Face Liveness initialization is failed. " + ((KYCLivenessReason.InitializationError) reason).getException().getMessage();
             } else {
-                message = "KYC Liveness Face Detection result is " + reason;
+                message = "KYC Liveness Face Liveness result is " + reason;
             }
 
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
