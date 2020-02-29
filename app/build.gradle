@@ -50,7 +50,7 @@ android {
         }
 
         debug {
-            buildConfigField("String", 'BASE_URL', '"dev-msdk.sumsub.com"')
+            buildConfigField("String", 'BASE_URL', '"test-msdk.sumsub.com"')
         }
     }
 
