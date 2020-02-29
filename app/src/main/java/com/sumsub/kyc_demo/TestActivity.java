@@ -73,7 +73,6 @@ public class TestActivity extends AppCompatActivity {
         KYCClientData clientData = new KYCClientData(
                 BuildConfig.BASE_URL,
                 getPackageName(),
-                "2.0",
                 TestManager.getInstance().getLocale(),
                 TestManager.getInstance().getApplicant(),
                 "support@sumsub.com",
