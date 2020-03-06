@@ -20,6 +20,7 @@ import com.sumsub.kyc.core.model.KYCLivenessCustomization;
 import com.sumsub.kyc.core.model.Liveness3DModule;
 import com.sumsub.kyc.liveness3d.Liveness3DResultReceiver;
 import com.sumsub.kyc.liveness3d.data.model.KYCLiveness3D;
+import com.sumsub.kyc.liveness3d.data.model.KYCLivenessConfig;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessReason;
 import com.sumsub.kyc.liveness3d.data.model.KYCLivenessResult;
 import com.sumsub.kyc.liveness3d.presentation.KYCLivenessFaceAuthActivity;
@@ -100,7 +101,7 @@ public class TestActivity extends AppCompatActivity {
         KYCLivenessCustomization customization = new KYCLivenessCustomization();
         customization.getFrame().setBackgroundColor(ContextCompat.getColor(this, R.color.blueDark));
         customization.getFrame().setRatio(0.98f);
-        startActivityForResult(KYCLivenessFaceAuthActivity.Companion.newIntent(this, apiUrl, applicant, token, Locale.getDefault(), customization, result), KYCLiveness3D.REQUEST_CODE_ID_FACE_AUTH);
+        startActivityForResult(KYCLivenessFaceAuthActivity.Companion.newIntent(this, apiUrl, applicant, token, Locale.getDefault(), customization, result, new KYCLivenessConfig(true, null, null)), KYCLiveness3D.REQUEST_CODE_ID_FACE_AUTH);
     }
 
     public void startKYCLivenessFaceLivenessModule() {
