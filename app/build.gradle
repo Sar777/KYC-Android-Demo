@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 ext {
-    kycVersion = "3.1.4"
+    kycVersion = "3.1.6"
     repoUrl = project.hasProperty("kycRepoUrl") ? project.property("kycRepoUrl") : "https://dl.bintray.com/sumsub/maven"
 }
 
@@ -22,6 +22,7 @@ android {
         targetSdkVersion 28
         versionCode 5
         versionName project.ext.kycVersion
+        multiDexEnabled = true
 
         vectorDrawables.useSupportLibrary = true
 
